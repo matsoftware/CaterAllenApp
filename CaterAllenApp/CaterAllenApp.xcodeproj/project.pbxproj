@@ -18,6 +18,7 @@
 		E59E87EC2143F9DE0017C22D /* ScriptScenario.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59E87EB2143F9DE0017C22D /* ScriptScenario.swift */; };
 		E59E87F02143FD130017C22D /* WebViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59E87EF2143FD130017C22D /* WebViewPresenter.swift */; };
 		E59E87F2214428C70017C22D /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59E87F1214428C70017C22D /* LoginPresenter.swift */; };
+		E59E87F62144369E0017C22D /* KeychainPasswordItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59E87F42144369E0017C22D /* KeychainPasswordItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,8 @@
 		E59E87EB2143F9DE0017C22D /* ScriptScenario.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptScenario.swift; sourceTree = "<group>"; };
 		E59E87EF2143FD130017C22D /* WebViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewPresenter.swift; sourceTree = "<group>"; };
 		E59E87F1214428C70017C22D /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
+		E59E87F42144369E0017C22D /* KeychainPasswordItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainPasswordItem.swift; sourceTree = "<group>"; };
+		E59E87F52144369E0017C22D /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +78,7 @@
 				E59E87EF2143FD130017C22D /* WebViewPresenter.swift */,
 				E59E87E52143F4720017C22D /* AccountModel.swift */,
 				E59E87EB2143F9DE0017C22D /* ScriptScenario.swift */,
+				E59E87F32144369E0017C22D /* KeychainWrapper */,
 				E59E87D02143EEA10017C22D /* Main.storyboard */,
 				E59E87D32143EEA20017C22D /* Assets.xcassets */,
 				E59E87D52143EEA20017C22D /* LaunchScreen.storyboard */,
@@ -89,6 +93,15 @@
 				E59E87E32143F1D50017C22D /* WebKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E59E87F32144369E0017C22D /* KeychainWrapper */ = {
+			isa = PBXGroup;
+			children = (
+				E59E87F42144369E0017C22D /* KeychainPasswordItem.swift */,
+				E59E87F52144369E0017C22D /* LICENSE.txt */,
+			);
+			path = KeychainWrapper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -165,6 +178,7 @@
 				E59E87DF2143F09B0017C22D /* LoginViewController.swift in Sources */,
 				E59E87E12143F0C30017C22D /* WebViewController.swift in Sources */,
 				E59E87F2214428C70017C22D /* LoginPresenter.swift in Sources */,
+				E59E87F62144369E0017C22D /* KeychainPasswordItem.swift in Sources */,
 				E59E87CD2143EEA10017C22D /* AppDelegate.swift in Sources */,
 				E59E87EC2143F9DE0017C22D /* ScriptScenario.swift in Sources */,
 				E59E87E62143F4720017C22D /* AccountModel.swift in Sources */,

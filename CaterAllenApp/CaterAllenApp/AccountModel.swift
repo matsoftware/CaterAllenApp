@@ -8,24 +8,49 @@
 
 import Foundation
 
+enum AccountKeys: String {
+    case customerID
+    case pac
+    case password
+    case defaultAccountNumber
+}
+
 struct AccountModel {
     
-    let baseURL = "https://www.caterallenonline.co.uk"
-
-    var customerID: String
-    var pac: String
-    var password: String
-    var defaultAccountNumber: String
-    
-    init(customerID: String, pac: String, password: String, defaultAccountNumber: String) {
-        self.customerID = customerID
-        self.pac = pac
-        self.password = password
-        self.defaultAccountNumber = defaultAccountNumber
+    enum KeyPathError: Error {
+        case missingKeypath
     }
     
+    let baseURL = "https://www.caterallenonline.co.uk"
+    
+    var customerID: String = ""
+    var pac: String = ""
+    var password: String = ""
+    var defaultAccountNumber: String = ""
+    
     var isValid: Bool {
-        return !customerID.isEmpty && pac.count == 6 && !password.isEmpty && !defaultAccountNumber.isEmpty
+        return !self.customerID.isEmpty &&
+            self.pac.count == 6 &&
+            !self.password.isEmpty &&
+            !self.defaultAccountNumber.isEmpty
+    }
+    
+    static func keyPath(from str: String) throws -> WritableKeyPath<AccountModel, String> {
+        guard let key = AccountKeys(rawValue: str) else {
+            throw KeyPathError.missingKeypath
+        }
+        
+        switch key {
+        case .customerID:
+            return \AccountModel.customerID
+        case .pac:
+            return \AccountModel.pac
+        case .password:
+            return \AccountModel.password
+        case .defaultAccountNumber:
+            return \AccountModel.defaultAccountNumber
+        }
+        
     }
     
 }
