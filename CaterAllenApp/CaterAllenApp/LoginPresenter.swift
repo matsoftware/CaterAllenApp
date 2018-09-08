@@ -40,7 +40,18 @@ final class LoginPresenter: LoginViewHandler {
         
         interactor.store(model: model)
         
-        view.navigateToAccount(model: model)
+        interactor.deviceAuthenticationLogin { [weak self] authSucceded in
+            guard let strongSelf = self else { return }
+            
+            DispatchQueue.main.async {
+                if authSucceded {
+                    strongSelf.view.navigateToAccount(model: model)
+                } else {
+                    strongSelf.view.showError()
+                }
+            }
+            
+        }
         
     }
     

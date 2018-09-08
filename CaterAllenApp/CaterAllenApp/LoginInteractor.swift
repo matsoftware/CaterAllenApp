@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import LocalAuthentication
 
 protocol LoginInteractorInterface {
     
@@ -15,6 +16,8 @@ protocol LoginInteractorInterface {
     func store(model: AccountModel)
     
     var existingModel: AccountModel? { get }
+    
+    func deviceAuthenticationLogin(result: @escaping (Bool) -> Void)
     
 }
 
@@ -66,5 +69,17 @@ final class LoginInteractor: LoginInteractorInterface {
     }
     
     // MARK: - Biometrics
+    
+    func deviceAuthenticationLogin(result: @escaping (Bool) -> Void) {
+        let context = LAContext()
+        var error: NSError?
+        if context.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error) {
+            context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: "Login to your account") { success, error in
+                result(success)
+            }
+        } else {
+            result(false)
+        }
+    }
     
 }

@@ -13,9 +13,7 @@ protocol LoginView: class {
     func populateFields(model: AccountModel)
     
     func showError()
-    
-    func askForBiometricsAuth()
-    
+        
     func navigateToAccount(model: AccountModel)
     
 }
@@ -78,11 +76,7 @@ extension LoginViewController: LoginView {
         present(alert, animated: true, completion: nil)
     }
     
-    func askForBiometricsAuth() {
-        
-    }
-    
     func navigateToAccount(model: AccountModel) {
-        performSegue(withIdentifier: goToAccount, sender: model)
+       performSegue(withIdentifier: goToAccount, sender: model)
     }
 }
