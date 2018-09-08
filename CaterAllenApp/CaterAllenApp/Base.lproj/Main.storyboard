@@ -57,7 +57,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="lUa-Sl-B2g"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Login" id="TYj-QW-afH"/>
+                    <navigationItem key="navigationItem" title="Cater Allen" id="TYj-QW-afH"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fAx-Mw-adJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -70,23 +70,7 @@
                     <view key="view" contentMode="scaleToFill" id="Rus-fm-xvC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yRy-pF-yCS">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <wkWebViewConfiguration key="configuration">
-                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
-                                    <wkPreferences key="preferences"/>
-                                </wkWebViewConfiguration>
-                            </wkWebView>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="yRy-pF-yCS" firstAttribute="bottom" secondItem="twM-Z6-jvr" secondAttribute="bottom" id="GhV-ix-I01"/>
-                            <constraint firstItem="yRy-pF-yCS" firstAttribute="leading" secondItem="twM-Z6-jvr" secondAttribute="leading" id="N6V-6I-pfU"/>
-                            <constraint firstItem="yRy-pF-yCS" firstAttribute="top" secondItem="twM-Z6-jvr" secondAttribute="top" id="n3Y-IQ-29m"/>
-                            <constraint firstItem="yRy-pF-yCS" firstAttribute="trailing" secondItem="twM-Z6-jvr" secondAttribute="trailing" id="wF2-Sr-ytY"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="twM-Z6-jvr"/>
                     </view>
                 </viewController>
