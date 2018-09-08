@@ -19,6 +19,7 @@
 		E59E87F02143FD130017C22D /* WebViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59E87EF2143FD130017C22D /* WebViewPresenter.swift */; };
 		E59E87F2214428C70017C22D /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59E87F1214428C70017C22D /* LoginPresenter.swift */; };
 		E59E87F62144369E0017C22D /* KeychainPasswordItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59E87F42144369E0017C22D /* KeychainPasswordItem.swift */; };
+		E59E87F92144466F0017C22D /* LoginInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59E87F82144466F0017C22D /* LoginInteractor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,7 @@
 		E59E87F1214428C70017C22D /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
 		E59E87F42144369E0017C22D /* KeychainPasswordItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainPasswordItem.swift; sourceTree = "<group>"; };
 		E59E87F52144369E0017C22D /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
+		E59E87F82144466F0017C22D /* LoginInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInteractor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +76,7 @@
 				E59E87CC2143EEA10017C22D /* AppDelegate.swift */,
 				E59E87DE2143F09B0017C22D /* LoginViewController.swift */,
 				E59E87F1214428C70017C22D /* LoginPresenter.swift */,
+				E59E87F82144466F0017C22D /* LoginInteractor.swift */,
 				E59E87E02143F0C30017C22D /* WebViewController.swift */,
 				E59E87EF2143FD130017C22D /* WebViewPresenter.swift */,
 				E59E87E52143F4720017C22D /* AccountModel.swift */,
@@ -183,6 +186,7 @@
 				E59E87EC2143F9DE0017C22D /* ScriptScenario.swift in Sources */,
 				E59E87E62143F4720017C22D /* AccountModel.swift in Sources */,
 				E59E87F02143FD130017C22D /* WebViewPresenter.swift in Sources */,
+				E59E87F92144466F0017C22D /* LoginInteractor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

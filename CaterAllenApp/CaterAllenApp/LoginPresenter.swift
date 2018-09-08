@@ -19,13 +19,15 @@ protocol LoginViewHandler {
 final class LoginPresenter: LoginViewHandler {
     
     weak var view: LoginView!
+    private let interactor: LoginInteractorInterface
     
-    private var existingModel: AccountModel?
-    private let service = "CaterAllenApp"
+    init(interactor: LoginInteractorInterface = LoginInteractor()) {
+        self.interactor = interactor
+    }
     
     func viewDidLoad() {
-        existingModel = readStoredValues()
-        if let existingModel = existingModel {
+        interactor.readValues()
+        if let existingModel = interactor.existingModel {
             view.populateFields(model: existingModel)
         }
     }
@@ -36,9 +38,7 @@ final class LoginPresenter: LoginViewHandler {
             return
         }
         
-        if model != existingModel {
-            store(model: model)
-        }
+        interactor.store(model: model)
         
         view.navigateToAccount(model: model)
         
@@ -46,38 +46,3 @@ final class LoginPresenter: LoginViewHandler {
     
 }
 
-// MARK: - KeyChain access
-extension LoginPresenter {
-    
-    private func readStoredValues() -> AccountModel? {
-        do {
-            let passwordItems = try KeychainPasswordItem.passwordItems(forService: service)
-            if passwordItems.isEmpty {
-                return nil
-            }
-            var model = AccountModel()
-            try passwordItems.forEach {
-                try model[keyPath: AccountModel.keyPath(from: $0.account)] = try $0.readPassword()
-            }
-            return model
-        }
-        catch {
-            assertionFailure("Error fetching password items - \(error)")
-        }
-        
-        return nil
-    }
-    
-    private func store(model: AccountModel) {
-        do {
-            try AccountKeys.allCases.forEach {
-                let keyPath = try AccountModel.keyPath(from: $0.rawValue)
-                let item = KeychainPasswordItem(service: service, account: $0.rawValue)
-                try item.savePassword(model[keyPath: keyPath])
-            }
-        } catch {
-            assertionFailure("Cannot store login data.")
-        }
-    }
-    
-}
