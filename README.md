@@ -1,6 +1,6 @@
 # CaterAllenApp
 
-Unofficial iOS banking app for CateAllen customers
+Unofficial iOS banking app for CaterAllen customers
 
 ## Why?
 
