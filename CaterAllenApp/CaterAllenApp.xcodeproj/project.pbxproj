@@ -17,6 +17,7 @@
 		E59E87E62143F4720017C22D /* AccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59E87E52143F4720017C22D /* AccountModel.swift */; };
 		E59E87EC2143F9DE0017C22D /* ScriptScenario.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59E87EB2143F9DE0017C22D /* ScriptScenario.swift */; };
 		E59E87F02143FD130017C22D /* WebViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59E87EF2143FD130017C22D /* WebViewPresenter.swift */; };
+		E59E87F2214428C70017C22D /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59E87F1214428C70017C22D /* LoginPresenter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		E59E87E52143F4720017C22D /* AccountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountModel.swift; sourceTree = "<group>"; };
 		E59E87EB2143F9DE0017C22D /* ScriptScenario.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptScenario.swift; sourceTree = "<group>"; };
 		E59E87EF2143FD130017C22D /* WebViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewPresenter.swift; sourceTree = "<group>"; };
+		E59E87F1214428C70017C22D /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +70,7 @@
 			children = (
 				E59E87CC2143EEA10017C22D /* AppDelegate.swift */,
 				E59E87DE2143F09B0017C22D /* LoginViewController.swift */,
+				E59E87F1214428C70017C22D /* LoginPresenter.swift */,
 				E59E87E02143F0C30017C22D /* WebViewController.swift */,
 				E59E87EF2143FD130017C22D /* WebViewPresenter.swift */,
 				E59E87E52143F4720017C22D /* AccountModel.swift */,
@@ -161,6 +164,7 @@
 			files = (
 				E59E87DF2143F09B0017C22D /* LoginViewController.swift in Sources */,
 				E59E87E12143F0C30017C22D /* WebViewController.swift in Sources */,
+				E59E87F2214428C70017C22D /* LoginPresenter.swift in Sources */,
 				E59E87CD2143EEA10017C22D /* AppDelegate.swift in Sources */,
 				E59E87EC2143F9DE0017C22D /* ScriptScenario.swift in Sources */,
 				E59E87E62143F4720017C22D /* AccountModel.swift in Sources */,

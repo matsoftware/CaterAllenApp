@@ -24,4 +24,8 @@ struct AccountModel {
         self.defaultAccountNumber = defaultAccountNumber
     }
     
+    var isValid: Bool {
+        return !customerID.isEmpty && pac.count == 6 && !password.isEmpty && !defaultAccountNumber.isEmpty
+    }
+    
 }

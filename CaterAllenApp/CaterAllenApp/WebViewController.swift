@@ -21,14 +21,14 @@ protocol WebView: class {
 
 final class WebViewController: UIViewController {
     
-    var presenter: WebViewPresenter!
+    var eventHandler: WebViewEventHandler!
 
     @IBOutlet private var webView: WKWebView!
     private let userContentController = WKUserContentController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter.viewDidLoad()
+        eventHandler.viewDidLoad()
     }
     
     private func makeScript(_ script: String) -> WKUserScript {
@@ -53,7 +53,7 @@ extension WebViewController: WKScriptMessageHandler {
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         
         do {
-            try presenter.webViewMessageReceived(name: message.name, body: message.body as? String ?? "")
+            try eventHandler.webViewMessageReceived(name: message.name, body: message.body as? String ?? "")
         } catch let error {
             presentAlert("Error while communicating with the website (\(error.localizedDescription))")
         }
