@@ -36,9 +36,18 @@ final class LoginPresenter: LoginViewHandler {
             return
         }
         
+        if model != existingModel {
+            store(model: model)
+        }
+        
         view.navigateToAccount(model: model)
         
     }
+    
+}
+
+// MARK: - KeyChain access
+extension LoginPresenter {
     
     private func readStoredValues() -> AccountModel? {
         do {
@@ -57,6 +66,18 @@ final class LoginPresenter: LoginViewHandler {
         }
         
         return nil
+    }
+    
+    private func store(model: AccountModel) {
+        do {
+            try AccountKeys.allCases.forEach {
+                let keyPath = try AccountModel.keyPath(from: $0.rawValue)
+                let item = KeychainPasswordItem(service: service, account: $0.rawValue)
+                try item.savePassword(model[keyPath: keyPath])
+            }
+        } catch {
+            assertionFailure("Cannot store login data.")
+        }
     }
     
 }

@@ -8,14 +8,14 @@
 
 import Foundation
 
-enum AccountKeys: String {
+enum AccountKeys: String, CaseIterable {
     case customerID
     case pac
     case password
     case defaultAccountNumber
 }
 
-struct AccountModel {
+struct AccountModel: Equatable {
     
     enum KeyPathError: Error {
         case missingKeypath
