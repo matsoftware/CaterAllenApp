@@ -9,38 +9,68 @@
 import UIKit
 import WebKit
 
+protocol WebView: class {
+    
+    func initializeWebView(events: [String], injectedScript: String)
+    
+    func load(_ url: URL)
+    
+    func evaluateCommand(script: String)
+    
+}
+
 final class WebViewController: UIViewController {
     
-    var accountModel: AccountModel?
+    var presenter: WebViewPresenter!
 
     @IBOutlet private var webView: WKWebView!
     private let userContentController = WKUserContentController()
     
-    override func loadView() {
-        super.loadView()
-        initializeWebView()
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        guard let accountModel = accountModel else {
-            presentAlert("No account model passed.")
-            return
-        }
-
-        load(url: accountModel.baseURL)
+        presenter.viewDidLoad()
     }
     
-    private func initializeWebView() {
-        let config = WKWebViewConfiguration()
+    private func makeScript(_ script: String) -> WKUserScript {
+        return WKUserScript(
+            source: script,
+            injectionTime: WKUserScriptInjectionTime.atDocumentEnd,
+            forMainFrameOnly: true
+        )
+    }
+    
+    private func presentAlert(_ message: Any) {
+        let alert = UIAlertController(title: "Message", message: "\(message)", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
+    
+}
+
+// MARK: - WKScriptMessageHandler
+extension WebViewController: WKScriptMessageHandler {
+    
+    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         
-        ScriptScenario.allCases.forEach {
-            userContentController.add(self, name: $0.rawValue)
+        do {
+            try presenter.webViewMessageReceived(name: message.name, body: message.body as? String ?? "")
+        } catch let error {
+            presentAlert("Error while communicating with the website (\(error.localizedDescription))")
         }
         
-        userContentController.addUserScript(makeScript(ScriptScenario.scripts))
-        
+    }
+    
+}
+
+// MARK: - WebView
+extension WebViewController: WebView {
+   
+    func initializeWebView(events: [String], injectedScript: String) {
+        events.forEach {
+            userContentController.add(self, name: $0)
+        }
+        userContentController.addUserScript(makeScript(injectedScript))
+        let config = WKWebViewConfiguration()
         config.userContentController = userContentController
         
         webView = WKWebView(
@@ -56,76 +86,16 @@ final class WebViewController: UIViewController {
             webView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             webView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             webView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            ])
+        ])
 
     }
     
-    private func load(url: String) {
-        guard let url = URL(string: url) else {
-            assertionFailure("Loading wrong url")
-            return
-        }
+    func load(_ url: URL) {
         webView.load(URLRequest(url: url))
     }
     
-    
-}
-
-// MARK: - WKScriptMessageHandler
-extension WebViewController: WKScriptMessageHandler {
-    
-    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        processMessage(message, accountModel: accountModel!)
-    }
-    
-    private func processMessage(_ message: WKScriptMessage, accountModel: AccountModel) {
-        guard let scriptScenario = ScriptScenario(rawValue: message.name) else {
-            presentAlert("Wrong scenario")
-            return
-        }
-        
-        switch scriptScenario {
-        case .preLogin:
-            let pacStrings = extractPositionStrings(message.body as! String, from: accountModel.pac)
-            let evaluatedScript = "performLogin('\(accountModel.customerID)', '\(pacStrings[0])', '\(pacStrings[1])', '\(pacStrings[2])')"
-            evaluateScript(evaluatedScript)
-            break
-        case .preSecondStepAuth:
-            let passwordString = extractPositionStrings(message.body as! String, from: accountModel.password)
-            let evaluatedScript = "performSecondStep('\(passwordString[0])', '\(passwordString[1])', '\(passwordString[2])')"
-            evaluateScript(evaluatedScript)
-            break
-        case .importantInfo:
-            let evaluatedScript = "performContinueImportantInfo()"
-            evaluateScript(evaluatedScript)
-        case .showTransactions:
-            let evaluatedScript = "showTransactions('\(accountModel.defaultAccountNumber)')"
-            evaluateScript(evaluatedScript)
-            break
-        default:
-            presentAlert(message.body)
-            break
-        }
-
-    }
-    
-    private func extractPositionStrings(_ rawMessage: String, from source: String) -> [String] {
-        return rawMessage.components(separatedBy: CharacterSet.decimalDigits.inverted)
-            .compactMap {
-                Int($0)
-            }
-            .map {
-                String(source[source.index(source.startIndex, offsetBy: $0 - 1)])
-        }
-    }
-    
-    private func evaluateScript(_ script: String) {
-        print("+++ Evaluating \(script) +++")
-        webView.evaluateJavaScript(script) { (res, error) in
-            if let res = res {
-                print(res)
-            }
-        }
+    func evaluateCommand(script: String) {
+        webView.evaluateJavaScript(script) { _, _ in }
     }
     
 }

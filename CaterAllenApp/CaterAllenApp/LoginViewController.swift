@@ -22,7 +22,8 @@ class LoginViewController: UIViewController {
                                  password: "",
                                  defaultAccountNumber: "")
         
-        webViewController.accountModel = model
+        let presenter = WebViewPresenter(accountModel: model, view: webViewController)
+        webViewController.presenter = presenter
     }
 
 }
