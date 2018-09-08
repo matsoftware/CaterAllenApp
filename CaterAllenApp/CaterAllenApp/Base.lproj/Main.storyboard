@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.13.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="JNo-uE-ENM">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.9"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="eSt-p3-B1H">
+            <objects>
+                <navigationController id="JNo-uE-ENM" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="N4x-A5-1JE">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Weh-bm-VYr" kind="relationship" relationship="rootViewController" id="LLo-fo-qJY"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OR9-mv-mWc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-36" y="173"/>
+        </scene>
+        <!--Login-->
+        <scene sceneID="5VE-mW-nmL">
+            <objects>
+                <viewController title="Login" id="Weh-bm-VYr" customClass="LoginViewController" customModule="CaterAllenApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="FaH-7v-lMC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wnK-OC-wYE">
+                                <rect key="frame" x="10" y="311.5" width="355" height="44"/>
+                                <color key="backgroundColor" red="0.12549019610000001" green="0.42745098040000001" blue="0.7725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="cdc-jR-agK"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                <state key="normal" title="Login">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="kN2-ca-PIH" kind="show" id="8t7-C0-Yaq"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="wnK-OC-wYE" firstAttribute="leading" secondItem="lUa-Sl-B2g" secondAttribute="leading" constant="10" id="V2I-3u-bjz"/>
+                            <constraint firstItem="wnK-OC-wYE" firstAttribute="centerY" secondItem="FaH-7v-lMC" secondAttribute="centerY" id="ecc-Qi-NSy"/>
+                            <constraint firstItem="wnK-OC-wYE" firstAttribute="centerX" secondItem="FaH-7v-lMC" secondAttribute="centerX" id="faK-b2-WAJ"/>
+                            <constraint firstItem="lUa-Sl-B2g" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="wnK-OC-wYE" secondAttribute="trailing" id="j7a-Fx-mVU"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="lUa-Sl-B2g"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Login" id="TYj-QW-afH"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fAx-Mw-adJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="736.79999999999995" y="171.36431784107947"/>
+        </scene>
+        <!--Bank Account-->
+        <scene sceneID="4xh-VD-tbQ">
+            <objects>
+                <viewController title="Bank Account" id="kN2-ca-PIH" customClass="WebViewController" customModule="CaterAllenApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Rus-fm-xvC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yRy-pF-yCS">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="yRy-pF-yCS" firstAttribute="bottom" secondItem="twM-Z6-jvr" secondAttribute="bottom" id="GhV-ix-I01"/>
+                            <constraint firstItem="yRy-pF-yCS" firstAttribute="leading" secondItem="twM-Z6-jvr" secondAttribute="leading" id="N6V-6I-pfU"/>
+                            <constraint firstItem="yRy-pF-yCS" firstAttribute="top" secondItem="twM-Z6-jvr" secondAttribute="top" id="n3Y-IQ-29m"/>
+                            <constraint firstItem="yRy-pF-yCS" firstAttribute="trailing" secondItem="twM-Z6-jvr" secondAttribute="trailing" id="wF2-Sr-ytY"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="twM-Z6-jvr"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Bci-nL-3VA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1472.8" y="171.36431784107947"/>
+        </scene>
+    </scenes>
+</document>
