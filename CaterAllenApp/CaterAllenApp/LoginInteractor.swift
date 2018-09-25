@@ -73,8 +73,8 @@ final class LoginInteractor: LoginInteractorInterface {
     func deviceAuthenticationLogin(result: @escaping (Bool) -> Void) {
         let context = LAContext()
         var error: NSError?
-        if context.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error) {
-            context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: "Login to your account") { success, error in
+        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: "Login to your account") { success, error in
                 result(success)
             }
         } else {
