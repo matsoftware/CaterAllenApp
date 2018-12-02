@@ -47,12 +47,14 @@ final class WebViewPresenter: WebViewEventHandler {
         
         switch scriptScenario {
         case .preLogin:
-            let pacStrings = extractPositionStrings(body, from: accountModel.pac)
-            script = "performLogin('\(accountModel.customerID)', '\(pacStrings[0])', '\(pacStrings[1])', '\(pacStrings[2])')"
+            script = "performLoginFirstStep('\(accountModel.customerID)')"
             break
         case .preSecondStepAuth:
-            let passwordString = extractPositionStrings(body, from: accountModel.password)
-            script = "performSecondStep('\(passwordString[0])', '\(passwordString[1])', '\(passwordString[2])')"
+            // PAC and Password are in the same message. Stripping the string with a custom separator.
+            let composedPacAndPassword = body.components(separatedBy: CharacterSet(charactersIn: pacPasswordSeparator))
+            let pacStrings = extractPositionStrings(composedPacAndPassword[0], from: accountModel.pac)
+            let passwordString = extractPositionStrings(composedPacAndPassword[1], from: accountModel.password)
+            script = "performSecondStep('\(pacStrings[0])','\(pacStrings[1])','\(pacStrings[2])','\(passwordString[0])', '\(passwordString[1])', '\(passwordString[2])')"
             break
         case .importantInfo:
             script = "performContinueImportantInfo()"
@@ -103,25 +105,29 @@ extension WebViewPresenter {
         let eventListeners =
         """
         window.addEventListener("load", function(){
-            var rawPac = getElem('.//div[@id="tran_confirm"]//span')
-            if (rawPac != null) {
-                webkit.messageHandlers.\(ScriptScenario.preLogin.rawValue).postMessage(rawPac.innerText);
+        
+            var inputUserName = getElem('.//*[@id="user_id"]/h1');
+            console.log("Should log me ");
+            if (inputUserName != null) {
+                webkit.messageHandlers.\(ScriptScenario.preLogin.rawValue).postMessage(inputUserName.innerText);
             }
         
-            var rawPassword = getElem('.//div[@id="tran_confirm2"]//span')
-            if (rawPassword != null) {
-                webkit.messageHandlers.\(ScriptScenario.preSecondStepAuth.rawValue).postMessage(rawPassword.innerText);
+            var rawPac = getElem('(.//div[@id="tran_confirm"]//span)[1]');
+            var rawPassword = getElem('(.//div[@id="tran_confirm"]//span)[2]');
+            if ((rawPassword != null) && (rawPac != null)) {
+                var composedValue = rawPac.innerText + "\(pacPasswordSeparator)" + rawPassword.innerText;
+                webkit.messageHandlers.\(ScriptScenario.preSecondStepAuth.rawValue).postMessage(composedValue);
             }
         
             var importantInfoPath = './/h1["Important Information"]';
             var importantInfoText = getElem(importantInfoPath);
-            if (importantInfoText != null) {
+            if ((importantInfoText.innerText) != (inputUserName.innerText)) {
                 webkit.messageHandlers.\(ScriptScenario.importantInfo.rawValue).postMessage(importantInfoPath);
             }
         
             var myPortfolioPath = './/h1["My Portfolio"]';
             var myPortfolio = getElem(myPortfolioPath);
-            if (myPortfolio != null) {
+            if (myPortfolio.innerText == "My Portfolio") {
                 webkit.messageHandlers.\(ScriptScenario.showTransactions.rawValue).postMessage(myPortfolioPath);
             }
         
@@ -133,7 +139,7 @@ extension WebViewPresenter {
         });
         """
         
-        let performLogin =
+        let performLoginFirstStep =
         """
 
             function empty() {
@@ -144,32 +150,31 @@ extension WebViewPresenter {
                 return false;
             }
 
-            function performLogin(custId, PAC1, PAC2, PAC3) {
-                var inputCustId = getElem('.//input[@id="iCustId"]');
-                var inputPAC1 = getElem('.//input[@id="ipos1"]');
-                var inputPAC2 = getElem('.//input[@id="ipos2"]');
-                var inputPAC3 = getElem('.//input[@id="ipos3"]');
-                var confirmButton = getElem('.//input[@id="butt"]');
-
+            function performLoginFirstStep(custId) {
+                var inputCustId = getElem('.//input[@id="iUserName"]');
                 inputCustId.value = custId;
-                inputPAC1.value = PAC1;
-                inputPAC2.value = PAC2;
-                inputPAC3.value = PAC3;
-
+                var confirmButton = getElem('.//input[@id="butt"]');
                 confirmButton.onclick = submitAction;
                 submitAction()
                 confirmButton.onclick = empty
-
             }
         """
         
         let performSecondStep =
         """
 
-            function performSecondStep(PASSW1, PASSW2, PASSW3) {
+            function performSecondStep(PAC1, PAC2, PAC3, PASSW1, PASSW2, PASSW3) {
+                var inputPAC1 = getElem('.//input[@id="ipos1"]');
+                var inputPAC2 = getElem('.//input[@id="ipos2"]');
+                var inputPAC3 = getElem('.//input[@id="ipos3"]');
+
                 var inputPASSW1 = getElem('.//input[@id="iPasspos1"]');
                 var inputPASSW2 = getElem('.//input[@id="iPasspos2"]');
                 var inputPASSW3 = getElem('.//input[@id="iPasspos3"]');
+
+                inputPAC1.value = PAC1;
+                inputPAC2.value = PAC2;
+                inputPAC3.value = PAC3;
 
                 inputPASSW1.value = PASSW1;
                 inputPASSW2.value = PASSW2;
@@ -216,7 +221,7 @@ extension WebViewPresenter {
         
         return [common,
                 eventListeners,
-                performLogin,
+                performLoginFirstStep,
                 performSecondStep,
                 performImportantInfo,
                 performShowTransactions].joined(separator: "\n")

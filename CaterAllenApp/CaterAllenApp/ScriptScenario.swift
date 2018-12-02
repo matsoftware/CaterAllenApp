@@ -8,6 +8,8 @@
 
 import Foundation
 
+let pacPasswordSeparator = "|"
+
 enum ScriptScenario: String, CaseIterable {
     case preLogin
     case preSecondStepAuth
