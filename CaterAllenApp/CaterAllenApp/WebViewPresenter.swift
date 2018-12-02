@@ -92,6 +92,10 @@ extension WebViewPresenter {
                 return null;
             };
 
+            function extrInnerText(element) {
+                return (element != null) ? element.innerText : "null";
+            }
+            
             function appendHiddenField(name, value) {
                 var hInput = document.createElement("input");
                 hInput.setAttribute("type", "hidden");
@@ -107,9 +111,9 @@ extension WebViewPresenter {
         window.addEventListener("load", function(){
         
             var inputUserName = getElem('.//*[@id="user_id"]/h1');
-            console.log("Should log me ");
+            var inputUserNameText = extrInnerText(inputUserName)
             if (inputUserName != null) {
-                webkit.messageHandlers.\(ScriptScenario.preLogin.rawValue).postMessage(inputUserName.innerText);
+                webkit.messageHandlers.\(ScriptScenario.preLogin.rawValue).postMessage(inputUserNameText);
             }
         
             var rawPac = getElem('(.//div[@id="tran_confirm"]//span)[1]');
@@ -119,10 +123,11 @@ extension WebViewPresenter {
                 webkit.messageHandlers.\(ScriptScenario.preSecondStepAuth.rawValue).postMessage(composedValue);
             }
         
-            var importantInfoPath = './/h1["Important Information"]';
-            var importantInfoText = getElem(importantInfoPath);
-            if ((importantInfoText.innerText) != (inputUserName.innerText)) {
-                webkit.messageHandlers.\(ScriptScenario.importantInfo.rawValue).postMessage(importantInfoPath);
+            var importantInfoPathStr = './/h1["Important Information"]';
+            var importantInfoPath = getElem(importantInfoPathStr);
+            var importantInfoText = extrInnerText(importantInfoPath)
+            if (importantInfoText != inputUserNameText) {
+                webkit.messageHandlers.\(ScriptScenario.importantInfo.rawValue).postMessage(importantInfoText);
             }
         
             var myPortfolioPath = './/h1["My Portfolio"]';
