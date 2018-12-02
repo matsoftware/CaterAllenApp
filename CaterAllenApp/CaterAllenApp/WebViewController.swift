@@ -29,6 +29,7 @@ final class WebViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         eventHandler.viewDidLoad()
+        addReloadButton()
     }
     
     private func makeScript(_ script: String) -> WKUserScript {
@@ -45,6 +46,15 @@ final class WebViewController: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
+    private func addReloadButton() {
+        let rightButton = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(refresh))
+        navigationItem.setRightBarButton(rightButton, animated: false)
+    }
+    
+    @objc func refresh() {
+        webView.reload()
+    }
+    
 }
 
 // MARK: - WKScriptMessageHandler
@@ -55,6 +65,8 @@ extension WebViewController: WKScriptMessageHandler {
         do {
             try eventHandler.webViewMessageReceived(name: message.name, body: message.body as? String ?? "")
         } catch let error {
+            webView.stopLoading()
+            navigationController?.popViewController(animated: false)
             presentAlert("Error while communicating with the website (\(error.localizedDescription))")
         }
         
