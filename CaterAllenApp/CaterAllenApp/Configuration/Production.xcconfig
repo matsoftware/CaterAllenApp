@@ -1,0 +1,14 @@
+//
+//  Production.xcconfig
+//  CaterAllenApp
+//
+//  Created by Mattia Campolese on 06/07/2020.
+//  Copyright © 2020 Mattia Campolese. All rights reserved.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+CODE_SIGN_ENTITLEMENTS = CaterAllenApp/Configuration/CaterAllenApp.entitlements
+CODE_SIGN_STYLE = Automatic
+DEVELOPMENT_TEAM = // Change to your team ID

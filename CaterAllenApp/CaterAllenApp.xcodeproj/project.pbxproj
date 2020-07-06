@@ -23,6 +23,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E523F58524B37D2A00F405B8 /* Production.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Production.xcconfig; sourceTree = "<group>"; };
+		E5945265249162CF004B86B5 /* CaterAllenApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CaterAllenApp.entitlements; sourceTree = "<group>"; };
 		E59E87C92143EEA10017C22D /* CaterAllenApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CaterAllenApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E59E87CC2143EEA10017C22D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E59E87D12143EEA10017C22D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -55,6 +57,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E523F58424B37CD600F405B8 /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				E5945265249162CF004B86B5 /* CaterAllenApp.entitlements */,
+				E523F58524B37D2A00F405B8 /* Production.xcconfig */,
+			);
+			path = Configuration;
+			sourceTree = "<group>";
+		};
 		E59E87C02143EEA00017C22D = {
 			isa = PBXGroup;
 			children = (
@@ -77,6 +88,7 @@
 		E59E87CB2143EEA10017C22D /* CaterAllenApp */ = {
 			isa = PBXGroup;
 			children = (
+				E523F58424B37CD600F405B8 /* Configuration */,
 				E59E87CC2143EEA10017C22D /* AppDelegate.swift */,
 				E59E87DE2143F09B0017C22D /* LoginViewController.swift */,
 				E59E87F1214428C70017C22D /* LoginPresenter.swift */,
@@ -219,6 +231,7 @@
 /* Begin XCBuildConfiguration section */
 		E59E87D92143EEA20017C22D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E523F58524B37D2A00F405B8 /* Production.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -280,6 +293,7 @@
 		};
 		E59E87DA2143EEA20017C22D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E523F58524B37D2A00F405B8 /* Production.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -337,7 +351,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = CaterAllenApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -346,6 +359,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = it.matsoftware.CaterAllenApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -355,7 +369,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = CaterAllenApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -364,6 +377,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = it.matsoftware.CaterAllenApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
