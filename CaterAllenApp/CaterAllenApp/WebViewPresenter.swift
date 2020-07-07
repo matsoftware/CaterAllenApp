@@ -61,6 +61,9 @@ final class WebViewPresenter: WebViewEventHandler {
         case .showTransactions:
             script = "showTransactions('\(accountModel.defaultAccountNumber)')"
             break
+        case .showBalance:
+            view.showBalance("Balance: \(body)")
+            return
         case .error:
             throw ProcessorError.genericError(message: body)
         }
@@ -135,7 +138,13 @@ extension WebViewPresenter {
             if (myPortfolio.innerText == "My Portfolio") {
                 webkit.messageHandlers.\(ScriptScenario.showTransactions.rawValue).postMessage(myPortfolioPath);
             }
-        
+
+            var balancePath = '//*[@id="data_right_header"]/span[3]';
+            var balance = getElem(balancePath);
+            if (balance != null) {
+                webkit.messageHandlers.\(ScriptScenario.showBalance.rawValue).postMessage(balance.innerText);
+            }
+
             var rawError = getElem('.//div[@id="errRed"]')
             if (typeof rawError.innerText === 'string' && rawError.innerText.length > 0){
                 webkit.messageHandlers.\(ScriptScenario.error.rawValue).postMessage(rawError.innerText);
@@ -229,7 +238,8 @@ extension WebViewPresenter {
                 performLoginFirstStep,
                 performSecondStep,
                 performImportantInfo,
-                performShowTransactions].joined(separator: "\n")
+                performShowTransactions
+            ].joined(separator: "\n")
     }
 
     

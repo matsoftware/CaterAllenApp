@@ -15,5 +15,6 @@ enum ScriptScenario: String, CaseIterable {
     case preSecondStepAuth
     case importantInfo
     case showTransactions
+    case showBalance
     case error
 }

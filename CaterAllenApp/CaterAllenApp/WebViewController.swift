@@ -16,6 +16,8 @@ protocol WebView: class {
     func load(_ url: URL)
     
     func evaluateCommand(script: String)
+
+    func showBalance(_ balance: String)
     
 }
 
@@ -76,6 +78,10 @@ extension WebViewController: WKScriptMessageHandler {
 
 // MARK: - WebView
 extension WebViewController: WebView {
+
+    func showBalance(_ balance: String) {
+        title = balance
+    }
    
     func initializeWebView(events: [String], injectedScript: String) {
         events.forEach {
